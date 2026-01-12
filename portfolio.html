@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aryan Raj - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Ionicons for that specific look -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1f;
+            --border-color: #383838;
+            --accent-color: #4f46e5; /* indigo-600 */
+            --text-main: #fafafa;
+            --text-muted: #d6d6d6;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Layout Structure */
+        main {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 1024px) {
+            main {
+                flex-direction: row;
+                padding: 60px 20px;
+                align-items: flex-start;
+            }
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            width: 100%;
+            transition: all 0.5s ease;
+        }
+
+        @media (min-width: 1024px) {
+            .sidebar {
+                width: 300px;
+                position: sticky;
+                top: 60px;
+            }
+        }
+
+        .avatar-box {
+            background: #383838;
+            border-radius: 20px;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .sidebar-info { text-align: center; }
+        .sidebar-name { font-size: 1.5rem; font-weight: 600; margin-bottom: 10px; }
+        .sidebar-title { 
+            background: #2b2b2c; 
+            padding: 5px 15px; 
+            border-radius: 8px; 
+            font-size: 0.8rem; 
+            display: inline-block;
+        }
+
+        .contact-list { margin-top: 30px; border-top: 1px solid var(--border-color); padding-top: 25px; }
+        .contact-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .icon-box {
+            background: #202022;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            color: var(--accent-color);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            flex-grow: 1;
+            padding: 30px;
+            min-height: 80vh;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background: #2b2b2c;
+            border: 1px solid var(--border-color);
+            border-radius: 0 20px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 15px 10px;
+        }
+
+        @media (min-width: 1024px) {
+            .navbar {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: auto;
+                left: auto;
+                width: auto;
+                border-radius: 0 20px 0 20px;
+                padding: 10px 30px;
+            }
+        }
+
+        .navbar-list { display: flex; justify-content: center; gap: 20px; }
+        .navbar-link { 
+            color: var(--text-muted); 
+            font-size: 0.9rem; 
+            font-weight: 500; 
+            transition: 0.3s;
+        }
+        .navbar-link.active { color: var(--accent-color); }
+        .navbar-link:hover { color: var(--text-main); }
+
+        /* Section Styling */
+        article { display: none; }
+        article.active { display: block; animation: fadeIn 0.5s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .article-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .article-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 5px;
+            background: var(--accent-color);
+            border-radius: 3px;
+        }
+
+        /* Timeline */
+        .timeline-list { position: relative; padding-left: 45px; }
+        .timeline-list::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 15px;
+            width: 1px;
+            height: 100%;
+            background: var(--border-color);
+        }
+        .timeline-item { position: relative; margin-bottom: 30px; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: -37px;
+            width: 15px;
+            height: 15px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            border: 4px solid var(--card-bg);
+            box-shadow: 0 0 0 2px var(--border-color);
+        }
+
+        /* Skill Bars */
+        .skill-progress-bg {
+            background: #383838;
+            height: 8px;
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 8px;
+        }
+        .skill-progress-fill {
+            background: var(--accent-color);
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        /* AI Elements */
+        .loader {
+            border: 3px solid #383838;
+            border-radius: 50%;
+            border-top: 3px solid var(--accent-color);
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <main>
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-info">
+                <figure class="avatar-box">
+                    <img src="https://placehold.co/400x400/1e1e1f/ffffff?text=AR" alt="Aryan Raj" width="120">
+                </figure>
+                <h1 class="sidebar-name">Aryan Raj</h1>
+                <p class="sidebar-title">Computer Engineering Student</p>
+            </div>
+
+            <ul class="contact-list">
+                <li class="contact-item">
+                    <div class="icon-box"><ion-icon name="mail-outline"></ion-icon></div>
+                    <div class="contact-info">
+                        <p class="text-xs text-gray-500 uppercase">Email</p>
+                        <a href="mailto:aryanshankar302@outlook.com" class="text-sm">aryanshankar302@outlook.com</a>
+                    </div>
+                </li>
+                <li class="contact-item">
+                    <div class="icon-box"><ion-icon name="location-outline"></ion-icon></div>
+                    <div class="contact-info">
+                        <p class="text-xs text-gray-500 uppercase">Location</p>
+                        <address class="text-sm not-italic">Ranchi, India</address>
+                    </div>
+                </li>
+                <li class="contact-item">
+                    <div class="icon-box"><ion-icon name="logo-github"></ion-icon></div>
+                    <div class="contact-info">
+                        <p class="text-xs text-gray-500 uppercase">GitHub</p>
+                        <a href="https://github.com/AryanAwtar" target="_blank" class="text-sm">@AryanAwtar</a>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="flex justify-center gap-4 mt-8">
+                <a href="#" class="text-gray-400 hover:text-white transition" title="LinkedIn"><ion-icon name="logo-linkedin" size="large"></ion-icon></a>
+                <a href="#" class="text-gray-400 hover:text-white transition" title="Twitter"><ion-icon name="logo-twitter" size="large"></ion-icon></a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content relative">
+            <!-- Navbar -->
+            <nav class="navbar">
+                <ul class="navbar-list">
+                    <li><button class="navbar-link active" onclick="showPage('about')">About</button></li>
+                    <li><button class="navbar-link" onclick="showPage('resume')">Resume</button></li>
+                    <li><button class="navbar-link" onclick="showPage('portfolio')">Portfolio</button></li>
+                    <li><button class="navbar-link" onclick="showPage('contact')">Contact</button></li>
+                    <li><button class="navbar-link" onclick="showPage('ideation')">AI Tools</button></li>
+                </ul>
+            </nav>
+
+            <!-- About Section -->
+            <article id="about" class="active">
+                <header><h2 class="article-title">Digital Identity</h2></header>
+                <section class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>I'm Aryan Raj, a motivated Computer Engineering student at NIAMT, Ranchi. I specialize in Python-driven automation, backend development, and scalable data solutions.</p>
+                    <p>My expertise lies in building efficient systems using Django, C++, and cloud platforms like Azure and GCP. I thrive on solving complex problems and transforming data into actionable insights.</p>
+                </section>
+
+                <h3 class="text-xl font-bold mt-12 mb-6">What I'm Doing</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-[#212123] p-6 rounded-2xl border border-gray-800 flex gap-4">
+                        <div class="icon-box shrink-0"><ion-icon name="code-slash-outline" size="large"></ion-icon></div>
+                        <div>
+                            <h4 class="font-bold">Backend Dev</h4>
+                            <p class="text-sm text-gray-400 mt-1">High-performance web applications and API design.</p>
+                        </div>
+                    </div>
+                    <div class="bg-[#212123] p-6 rounded-2xl border border-gray-800 flex gap-4">
+                        <div class="icon-box shrink-0"><ion-icon name="bar-chart-outline" size="large"></ion-icon></div>
+                        <div>
+                            <h4 class="font-bold">Data Automation</h4>
+                            <p class="text-sm text-gray-400 mt-1">Automating workflows and web scraping with Selenium.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Resume Section -->
+            <article id="resume">
+                <header><h2 class="article-title">Career Snapshot</h2></header>
+                
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="icon-box"><ion-icon name="briefcase-outline"></ion-icon></div>
+                    <h3 class="text-xl font-bold">Experience</h3>
+                </div>
+
+                <ol class="timeline-list">
+                    <li class="timeline-item">
+                        <h4 class="font-bold text-indigo-400">Data Analyst Intern</h4>
+                        <p class="text-sm text-gray-500">BRILLWOOD CAPITAL | Aug 2024 — Present</p>
+                        <p class="text-sm text-gray-400 mt-2">Processed 50,000+ records monthly, automated cleaning using Pandas/NumPy.</p>
+                    </li>
+                    <li class="timeline-item">
+                        <h4 class="font-bold text-indigo-400">Back-end Developer</h4>
+                        <p class="text-sm text-gray-500">Smart India Hackathon | Oct 2023</p>
+                        <p class="text-sm text-gray-400 mt-2">Optimized backend architecture for emergency management platforms.</p>
+                    </li>
+                </ol>
+
+                <div class="flex items-center gap-4 mb-8 mt-12">
+                    <div class="icon-box"><ion-icon name="school-outline"></ion-icon></div>
+                    <h3 class="text-xl font-bold">Education</h3>
+                </div>
+
+                <ol class="timeline-list">
+                    <li class="timeline-item">
+                        <h4 class="font-bold text-indigo-400">NIAMT, Ranchi</h4>
+                        <p class="text-sm text-gray-500">B.Tech in Computer Engineering | 2022 — 2026</p>
+                        <p class="text-sm text-gray-400 mt-2">Focused on Distributed Systems and Manufacturing Tech. CGPA: 7.2</p>
+                    </li>
+                </ol>
+
+                <h3 class="text-xl font-bold mt-12 mb-6">Technical Skills</h3>
+                <ul class="grid md:grid-cols-2 gap-x-12 gap-y-6 bg-[#212123] p-8 rounded-2xl border border-gray-800">
+                    <li>
+                        <div class="flex justify-between font-bold text-sm"><span>Python</span><span>90%</span></div>
+                        <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 90%"></div></div>
+                    </li>
+                    <li>
+                        <div class="flex justify-between font-bold text-sm"><span>C++</span><span>85%</span></div>
+                        <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 85%"></div></div>
+                    </li>
+                    <li>
+                        <div class="flex justify-between font-bold text-sm"><span>Django</span><span>75%</span></div>
+                        <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 75%"></div></div>
+                    </li>
+                    <li>
+                        <div class="flex justify-between font-bold text-sm"><span>Cloud (Azure/GCP)</span><span>65%</span></div>
+                        <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 65%"></div></div>
+                    </li>
+                </ul>
+            </article>
+
+            <!-- Portfolio Section -->
+            <article id="portfolio">
+                <header><h2 class="article-title">Creative Showcase</h2></header>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-[#212123] rounded-2xl border border-gray-800 overflow-hidden group">
+                        <img src="https://placehold.co/600x400/1a1a1b/ffffff?text=Web+Scraper" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500" alt="Web Scraper">
+                        <div class="p-6">
+                            <h4 class="font-bold text-lg">Python Web Scraper</h4>
+                            <p class="text-sm text-gray-400 mt-2">Automated scraping engine using Selenium and BeautifulSoup.</p>
+                            <a href="https://github.com/AryanAwtar" target="_blank" class="inline-block mt-4 text-indigo-400 font-bold hover:underline">View on GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- AI Ideation Section -->
+            <article id="ideation">
+                <header><h2 class="article-title">✨ AI Project Lab</h2></header>
+                <div class="bg-[#212123] p-8 rounded-2xl border border-indigo-900/30">
+                    <p class="text-gray-400 mb-6">Brainstorm your next breakthrough project using Gemini AI.</p>
+                    <div class="flex gap-4">
+                        <input type="text" id="idea-keywords" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Enter keywords (e.g., Python, Finance, ML)">
+                        <button id="generate-ideas-btn" class="bg-indigo-600 hover:bg-indigo-700 px-8 rounded-xl font-bold transition">Generate</button>
+                    </div>
+                    <div id="ideas-loader" class="hidden mx-auto mt-8 loader"></div>
+                    <div id="ideas-output" class="mt-8 grid gap-4"></div>
+                </div>
+            </article>
+
+            <!-- Contact Section -->
+            <article id="contact">
+                <header><h2 class="article-title">Let's Connect</h2></header>
+                <form id="contact-form" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <input type="text" name="name" placeholder="Full Name" class="bg-[#212123] border border-gray-800 rounded-xl px-4 py-3 focus:border-indigo-500 outline-none" required>
+                        <input type="email" name="email" placeholder="Email Address" class="bg-[#212123] border border-gray-800 rounded-xl px-4 py-3 focus:border-indigo-500 outline-none" required>
+                    </div>
+                    <textarea id="message" rows="5" placeholder="Your Message" class="w-full bg-[#212123] border border-gray-800 rounded-xl px-4 py-3 focus:border-indigo-500 outline-none" required></textarea>
+                    
+                    <div class="flex flex-wrap gap-4 items-center">
+                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 px-10 py-3 rounded-xl font-bold flex items-center gap-2 transition">
+                            <ion-icon name="paper-plane"></ion-icon> Send Message
+                        </button>
+                        <button type="button" id="refine-message-btn" class="bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-xl font-bold flex items-center gap-2 transition text-sm">
+                            <div id="refine-loader" class="hidden loader"></div>
+                            ✨ Refine with AI
+                        </button>
+                    </div>
+                </form>
+            </article>
+        </div>
+    </main>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-[200] p-4">
+        <div class="bg-[#1e1e1f] border border-gray-800 rounded-3xl p-8 max-w-sm w-full text-center">
+            <div class="icon-box mx-auto mb-4 w-16 h-16 text-3xl"><ion-icon name="checkmark-done-outline"></ion-icon></div>
+            <h4 class="text-xl font-bold">Message Sent!</h4>
+            <p class="text-gray-400 mt-2">I'll get back to you shortly.</p>
+            <button onclick="document.getElementById('success-modal').classList.add('hidden')" class="mt-6 w-full bg-indigo-600 py-3 rounded-xl font-bold">Awesome</button>
+        </div>
+    </div>
+
+    <script>
+        // Page Switching Logic
+        function showPage(pageId) {
+            document.querySelectorAll('article').forEach(art => art.classList.remove('active'));
+            document.querySelectorAll('.navbar-link').forEach(link => link.classList.remove('active'));
+            
+            document.getElementById(pageId).classList.add('active');
+            
+            // Handle cases where the click event might be complex
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Gemini API Helper
+        async function callGemini(prompt) {
+            const apiKey = ""; // Managed by environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                });
+                const result = await response.json();
+                return result.candidates?.[0]?.content?.parts?.[0]?.text || "Error occurred.";
+            } catch (e) { return "Error calling AI."; }
+        }
+
+        // AI Idea Generator
+        document.getElementById('generate-ideas-btn').addEventListener('click', async () => {
+            const keywords = document.getElementById('idea-keywords').value;
+            const output = document.getElementById('ideas-output');
+            const loader = document.getElementById('ideas-loader');
+            
+            if(!keywords) return;
+            loader.classList.remove('hidden');
+            output.innerHTML = '';
+
+            const prompt = `Based on keywords "${keywords}", generate 3 tech project ideas for a student. Format as JSON: [{"title":"", "description":""}]`;
+            const response = await callGemini(prompt);
+            
+            loader.classList.add('hidden');
+            try {
+                const cleanResponse = response.replace(/```json|```/g, '').trim();
+                const ideas = JSON.parse(cleanResponse);
+                ideas.forEach(idea => {
+                    output.innerHTML += `
+                        <div class="bg-gray-900/50 p-5 rounded-xl border border-gray-800">
+                            <h5 class="font-bold text-indigo-400">${idea.title}</h5>
+                            <p class="text-sm text-gray-400 mt-1">${idea.description}</p>
+                        </div>`;
+                });
+            } catch(e) { output.innerHTML = "Failed to parse AI response. " + e.message; }
+        });
+
+        // AI Message Refiner
+        document.getElementById('refine-message-btn').addEventListener('click', async () => {
+            const msgArea = document.getElementById('message');
+            const loader = document.getElementById('refine-loader');
+            if(!msgArea.value) return;
+
+            loader.classList.remove('hidden');
+            const prompt = `Refine this message to be professional for a portfolio contact form. Return only the refined text without preamble: "${msgArea.value}"`;
+            const refinedText = await callGemini(prompt);
+            msgArea.value = refinedText.trim();
+            loader.classList.add('hidden');
+        });
+
+        // Form Submission
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const modal = document.getElementById('success-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>
