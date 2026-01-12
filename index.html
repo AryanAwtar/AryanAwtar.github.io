@@ -6,9 +6,6 @@
     <title>Aryan Raj - Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Ionicons -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <style>
         :root {
             --bg-color: #121212;
@@ -33,7 +30,7 @@
             flex-direction: column;
             gap: 25px;
             padding: 20px;
-            max-width: 1600px; /* Increased to fit the wider sidebar */
+            max-width: 1600px;
             margin: 0 auto;
         }
 
@@ -41,7 +38,7 @@
             main {
                 flex-direction: row;
                 padding: 60px 20px;
-                align-items: flex-start;
+                align-items: stretch;
             }
         }
 
@@ -58,8 +55,8 @@
 
         @media (min-width: 1024px) {
             .sidebar {
-                width: 400px; /* FIXED WIDTH AS REQUESTED */
-                min-width: 400px; /* Ensures it doesn't shrink */
+                width: 400px; /* Fixed width as per previous request */
+                min-width: 400px;
                 position: sticky;
                 top: 60px;
                 height: fit-content;
@@ -70,7 +67,7 @@
         .avatar-box {
             background: #383838;
             border-radius: 20px;
-            width: 150px; /* Slightly larger avatar for wider sidebar */
+            width: 150px;
             height: 150px;
             margin: 0 auto 20px;
             display: flex;
@@ -106,6 +103,7 @@
             min-width: 0; 
         }
         
+        /* Unified Icon Box Styling */
         .icon-box {
             background: #202022;
             width: 48px;
@@ -120,9 +118,12 @@
             flex-shrink: 0;
         }
 
-        .icon-box ion-icon {
+        /* Essential for ensuring Ionicons show up correctly */
+        ion-icon {
+            display: block;
             font-size: 22px;
-            --stroke-width: 32px;
+            color: var(--accent-color);
+            visibility: visible !important;
         }
 
         .contact-info {
@@ -147,7 +148,7 @@
             flex-grow: 1;
             padding: 40px;
             position: relative;
-            min-width: 0; /* Prevents overflow */
+            min-width: 0;
         }
 
         /* Navbar Styling */
@@ -263,6 +264,11 @@
             animation: spin 1s linear infinite;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .ai-glow {
+            box-shadow: 0 0 15px rgba(79, 70, 229, 0.4);
+            border: 1px solid rgba(79, 70, 229, 0.6) !important;
+        }
     </style>
 </head>
 <body>
@@ -272,7 +278,7 @@
         <aside class="sidebar">
             <div class="sidebar-info">
                 <figure class="avatar-box">
-                    <img src="https://placehold.co/400x400/1e1e1f/ffffff?text=AR" alt="Aryan Raj" width="150">
+                    <img src="https://placehold.co/400x400/1e1e1f/ffffff?text=AR" alt="Aryan Raj" width="120">
                 </figure>
                 <h1 class="sidebar-name">Aryan Raj</h1>
                 <p class="sidebar-title">Computer Engineering Student</p>
@@ -303,10 +309,10 @@
             </ul>
 
             <div class="flex justify-center gap-8 mt-12 mb-6">
-                <a href="https://www.linkedin.com/in/aryan-raj-39a8b61b1/" target="_blank" class="text-gray-400 hover:text-indigo-400 transition" title="LinkedIn">
+                <a href="https://www.linkedin.com/in/aryan-raj-39a8b61b1/" target="_blank" title="LinkedIn">
                     <ion-icon name="logo-linkedin" style="font-size: 32px;"></ion-icon>
                 </a>
-                <a href="https://x.com/aryanawtar" target="_blank" class="text-gray-400 hover:text-indigo-400 transition" title="X (Twitter)">
+                <a href="https://x.com/aryanawtar" target="_blank" title="X (Twitter)">
                     <ion-icon name="logo-twitter" style="font-size: 32px;"></ion-icon>
                 </a>
             </div>
@@ -352,9 +358,10 @@
                 </div>
             </article>
 
-            <!-- Other articles omitted for brevity but logic is identical -->
+            <!-- Resume Section -->
             <article id="resume">
                 <header><h2 class="article-title">Career Snapshot</h2></header>
+                
                 <div class="mb-8 p-6 bg-indigo-950/20 border border-indigo-500/30 rounded-2xl">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="font-bold text-indigo-400">Professional Pitch</h3>
@@ -362,6 +369,12 @@
                     </div>
                     <p id="pitch-display" class="text-sm text-gray-400 italic">Generate a custom AI bio based on your experience...</p>
                 </div>
+
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="icon-box"><ion-icon name="briefcase-outline"></ion-icon></div>
+                    <h3 class="text-xl font-bold">Experience</h3>
+                </div>
+
                 <ol id="experience-data" class="timeline-list">
                     <li class="timeline-item">
                         <h4 class="font-bold text-indigo-400">Data Analyst Intern</h4>
@@ -374,13 +387,47 @@
                         <p class="text-sm text-gray-400 mt-2">Optimized backend architecture for emergency management platforms.</p>
                     </li>
                 </ol>
+
+                <div class="flex items-center gap-4 mb-8 mt-12">
+                    <div class="icon-box"><ion-icon name="school-outline"></ion-icon></div>
+                    <h3 class="text-xl font-bold">Education</h3>
+                </div>
+
+                <ol id="education-data" class="timeline-list">
+                    <li class="timeline-item">
+                        <h4 class="font-bold text-indigo-400">NIAMT, Ranchi</h4>
+                        <p class="text-sm text-gray-500">B.Tech in Computer Engineering | 2022 — 2026</p>
+                        <p class="text-sm text-gray-400 mt-2">Focused on Distributed Systems and Manufacturing Tech. CGPA: 7.2</p>
+                    </li>
+                </ol>
+
+                <h3 class="text-xl font-bold mt-12 mb-6">Technical Skills</h3>
+                <ul id="skills-list" class="grid md:grid-cols-2 gap-x-12 gap-y-6 bg-[#212123] p-8 rounded-2xl border border-gray-800">
+                    <li>
+                        <div class="flex justify-between font-bold text-sm"><span>Python</span><span>90%</span></div>
+                        <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 90%"></div></div>
+                    </li>
+                    <li>
+                        <div class="flex justify-between font-bold text-sm"><span>C++</span><span>85%</span></div>
+                        <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 85%"></div></div>
+                    </li>
+                    <li>
+                        <div class="flex justify-between font-bold text-sm"><span>Django</span><span>75%</span></div>
+                        <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 75%"></div></div>
+                    </li>
+                    <li>
+                        <div class="flex justify-between font-bold text-sm"><span>Cloud (Azure/GCP)</span><span>65%</span></div>
+                        <div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 65%"></div></div>
+                    </li>
+                </ul>
             </article>
 
+            <!-- Portfolio Section -->
             <article id="portfolio">
-                <header><h2 class="article-title">Portfolio</h2></header>
+                <header><h2 class="article-title">Creative Showcase</h2></header>
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="bg-[#212123] rounded-2xl border border-gray-800 overflow-hidden group">
-                        <img src="https://placehold.co/600x400/1a1a1b/ffffff?text=Web+Scraper" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500" alt="Web Scraper">
+                        <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&q=80" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500" alt="Code">
                         <div class="p-6">
                             <h4 class="font-bold text-lg">Python Web Scraper</h4>
                             <p class="text-sm text-gray-400 mt-2">Automated scraping engine using Selenium and BeautifulSoup.</p>
@@ -390,6 +437,7 @@
                 </div>
             </article>
 
+            <!-- AI Ideation Section -->
             <article id="ideation">
                 <header><h2 class="article-title">✨ AI Project Lab</h2></header>
                 <div class="bg-[#212123] p-8 rounded-2xl border border-indigo-900/30">
@@ -398,11 +446,11 @@
                         <input type="text" id="idea-keywords" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 outline-none" placeholder="Enter keywords...">
                         <button id="generate-ideas-btn" class="bg-indigo-600 hover:bg-indigo-700 px-8 rounded-xl font-bold transition">Generate</button>
                     </div>
-                    <div id="ideas-loader" class="hidden mx-auto mt-8 loader"></div>
                     <div id="ideas-output" class="mt-8 grid gap-4"></div>
                 </div>
             </article>
 
+            <!-- Contact Section -->
             <article id="contact">
                 <header><h2 class="article-title">Let's Connect</h2></header>
                 <form id="contact-form" class="space-y-6">
@@ -416,6 +464,20 @@
             </article>
         </div>
     </main>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-[200] p-4">
+        <div class="bg-[#1e1e1f] border border-gray-800 rounded-3xl p-8 max-w-sm w-full text-center">
+            <div class="icon-box mx-auto mb-4 w-16 h-16 text-3xl"><ion-icon name="checkmark-done-outline"></ion-icon></div>
+            <h4 class="text-xl font-bold">Message Sent!</h4>
+            <p class="text-gray-400 mt-2">I'll get back to you shortly.</p>
+            <button onclick="document.getElementById('success-modal').classList.add('hidden')" class="mt-6 w-full bg-indigo-600 py-3 rounded-xl font-bold">Awesome</button>
+        </div>
+    </div>
+
+    <!-- Scripts at the end for best performance and icon loading -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <script>
         function showPage(pageId) {
@@ -439,12 +501,10 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        const apiKey = "AIzaSyCgGaOcfjsY3AOHv79YAHbo0iUzTuMzmlk"; 
+        const apiKey = "AIzaSyBEk36Fk-8sChG_5LDeBidvWNug_9biSbo"; 
 
         async function callGemini(prompt) {
-            if (apiKey === "AIzaSyCgGaOcfjsY3AOHv79YAHbo0iUzTuMzmlk" || !apiKey) {
-                return "API Key not configured. Deploy via GitHub Actions to enable AI.";
-            }
+            if (apiKey === "AIzaSyBEk36Fk-8sChG_5LDeBidvWNug_9biSbo" || !apiKey) return "API Key not configured. Deploy via GitHub Actions.";
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
             try {
                 const response = await fetch(apiUrl, {
